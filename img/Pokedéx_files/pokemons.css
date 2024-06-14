@@ -101,18 +101,19 @@
     padding:var(--padding);
     border-radius: 30px;
     border: 3px solid black;
-    background: white;
+    background: transparent;
     transition: backgroud 0.25s;
 }
 
 .search-input{
     font-size: 15px;
-    font-family: "Tiny5", sans-serif;
+    font-family: 'Lexend', sans-serif;
+    color: white;
     margin-left: var(--padding);
     border-radius: 30px;
     border: none;
     outline: none;
-    
+    background: transparent;  
 }
 
 .search-input::placeholder, .search-icon{
@@ -147,7 +148,7 @@
     justify-content: space-between;
 }
 .pokemon .background{
-   margin-left: 50px;
+    margin-left: 50px;
    max-width: 100%;
    position: absolute;
    opacity: .3;
@@ -196,4 +197,3 @@
     border: none;
     border-radius: 1rem;
 }
-

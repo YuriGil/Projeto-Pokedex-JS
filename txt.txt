@@ -1,313 +1,14 @@
-Com base no codigo abaixo, utilize esta API "pokeapi.co/", faça um codigo que ao clicar em um pokemon em uma lista ja existente, abra uma nova pagina com os detalhes do pokemon selecionado.  Deve ser feito em  javascript em um novo arquivo distinto. Deve ter um botão de ''voltar'' para a lista principal 
--------------HTML--------------
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Pokedéx</title>
-
-    <!--Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-
-    <!--Estilo-->
-    <link rel="stylesheet" href="./pokemons.css">
-    <link rel="stylesheet" href="./global.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-  </head>
-  <body>
-
-<section class="content">
-    <h1>Pokedéx</h1>
-    <ol id="pokemonList" class="pokemons" class="pokemon-list">
-    </ol>
-
-<div class="pagination">
-  <button id="loadMoreButton" type="button">
-    Load More
-  </button>
-</div>
-
-</section>
-    <!--JavaScript-->
-    <script src ="./pokemon-model.js"></script>
-    <script src="./poke-api.js"></script>
-    <script src="./main.js"></script>
-    <script src="./details.js"></script>
-  </body>
-</html>
-
-
-------------------CSS----------------
-
-* {
-    font-family: 'Roboto', sans-serifs;
-    font-weight: 900;
-    box-sizing: border-box;
-}
-body{
-    background-color: #f6f6f6;
-}
-.content {
-    width: 100vw;
-    height: 100vh;
-    padding: 1rem;
-    background-color: #fff;
-}
-@media screen and (min-width: 992px) {
-    .content{
-        max-width: 992px;
-        height: auto;
-        margin:  1rem auto;
-        border-radius: 1rem;
-    }
-}
-
-.content h1 {
-    margin: 0;
-}
-.pokemons {
-    display: grid;
-    grid-template-columns: 1fr;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-@media screen and (min-width: 380px) {
-    .pokemons{
-        grid-template-columns: 1fr 1fr;
-    }
-}
-@media screen and (min-width: 576px) {
-    .pokemons{
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-@media screen and (min-width: 992px) {
-    .pokemons{
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-}
-
-
-.content h1 {
-    margin: 0;
-}
-.pokemons {
-    display: grid;
-    grid-template-columns: 1fr;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.normal {
-    background-color: #a6a877;
-}
-
-.grass {
-    background-color: #77c850;
-}
-
-.fire {
-    background-color: #ee7f30;
-}
-
-.water {
-    background-color: #678fee;
-}
-
-.electric {
-    background-color: #f7cf2e;
-}
-
-.ice {
-    background-color: #98d5d7;
-}
-
-.ground {
-    background-color: #dfbf69;
-}
-
-.flying {
-    background-color: #a98ff0;
-}
-
-.poison {
-    background-color: #a040a0;
-}
-
-.fighting {
-    background-color: #bf3029;
-}
-
-.psychic {
-    background-color: #f65687;
-}
-
-.dark {
-    background-color: #725847;
-}
-
-.rock {
-    background-color: #b8a137;
-}
-
-.bug {
-    background-color: #a8b720;
-}
-
-.ghost {
-    background-color: #6e5896;
-}
-
-.steel {
-    background-color: #b9b7cf;
-}
-
-.dragon {
-    background-color: #6f38f6;
-}
-
-.fairy {
-    background-color: #f9aec7;
-}
-
-.pokemon{
-    display: flex;
-    flex-direction: column;
-    margin: .5rem;
-    border-radius: 1rem;
-    padding: 2rem 1rem;
-}
-.pokemon .number {
-    color: #000;
-    opacity: .4;
-    text-align: right;
-}
-.pokemon .name {
-    color: #fff;
-    margin: .25rem 0;
-    text-transform: capitalize;
-}
-.pokemon .detail{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-.pokemon .detail .types {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.pokemon .detail .types .type{
-    color: #fff;
-    padding: .25rem .5rem;
-    margin: .25rem 0;
-    font-size:1rem;
-    border-radius: 1rem;
-    filter: brightness(1.2);
-}
-.pokemon .detail img{
-    max-width: 100%;
-    height: 100px;
-}
-.pagination{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 1rem;
-}
-.pagination button{
-    padding: .25rem .5rem;
-    margin: .25rem 0;
-    font-size: .625rem;
-    color: #fff;
-    background-color: #6c79db;
-    border: none;
-    border-radius: 1rem;
-}
-@media screen and (min-width: 380px) {
-    .pokemons{
-        grid-template-columns: 1fr 1fr;
-    }
-}
-@media screen and (min-width: 576px) {
-    .pokemons{
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-@media screen and (min-width: 992px) {
-    .pokemons{
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-}
-
--------------------------JavaScript-------------------
-
-/*
-const offset = 0;
-const limit = 9;
-const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
-*/
-//pega o elemento do HTML para ser manipulado no JS
-const pokemonList = document.getElementById("pokemonList");
+----------------- JAVASCRIPT CONTENDO HTML PRINCIPAL DA PAGINA INICIAL DA POKEDEX -------------------
 const loadMoreButton = document.getElementById("loadMoreButton");
 
 const maxRecords = 151;
 const limit = 5;
 let offset = 0;
 
-
-/*
-
------Outros modos de escrever----
-
-//transforma a lista promise em lista HTML
-pokeApi.getPokemons().then((pokemons = []) => {
-  //literalmente mapeia os elementos do array para manipulação
-  const newList = pokemons.map((pokemon) => {
-    return convertPokemonToLi(pokemon);
-  })
-  //join = concatena os itens do array
-  const newHtml = newList.join("")
-  pokemonList.innerHTML += newHtml
-  
-})
-
-
------ outra forma de escrever -----
-
-const listaItems = []
-//percorrendo a lista
-for (let i = 0; i < pokemons.length; i++) {
-  //pega o elemento e converte ele para LI
-  const pokemon = pokemons[i];
-  //concatenando ele na lista
-  listaItems(convertPokemonToLi(pokemon))
-}
-*/
-//função para paginação de itens da lista
-//função para converter o resultado da promise em html para ser exibido e manipulado
 function loadPokemonItens(offset, limit) {
-  pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
+  pokeApi.getPokemons(offset, limit)
+  
+  .then((pokemons = []) => {
     const newHtml = pokemons
     .map(
       (pokemon) =>
@@ -350,108 +51,165 @@ loadMoreButton.addEventListener("click", () => {
     loadPokemonItens(offset, limit);
   }
 });
-/*
-const offset = 0;
-const limit = 9;
-const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
-*/
-//pega o elemento do HTML para ser manipulado no JS
-const pokemonList = document.getElementById("pokemonList");
-const loadMoreButton = document.getElementById("loadMoreButton");
 
-const maxRecords = 151;
-const limit = 5;
-let offset = 0;
+async function searchPokemon() {
+  const pokemonName = document.getElementById('pokemon-name').value.toLowerCase();
+  const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
 
-
-/*
-
------Outros modos de escrever----
-
-//transforma a lista promise em lista HTML
-pokeApi.getPokemons().then((pokemons = []) => {
-  //literalmente mapeia os elementos do array para manipulação
-  const newList = pokemons.map((pokemon) => {
-    return convertPokemonToLi(pokemon);
-  })
-  //join = concatena os itens do array
-  const newHtml = newList.join("")
-  pokemonList.innerHTML += newHtml
-  
-})
-
-
------ outra forma de escrever -----
-
-const listaItems = []
-//percorrendo a lista
-for (let i = 0; i < pokemons.length; i++) {
-  //pega o elemento e converte ele para LI
-  const pokemon = pokemons[i];
-  //concatenando ele na lista
-  listaItems(convertPokemonToLi(pokemon))
+  try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+          throw new Error('Pokémon não encontrado');
+      }
+      
+      const pokemonData = await response.json();
+      
+      // Chamar a função preexistente para exibir os detalhes do Pokémon
+      loadPokemonDetailsInNewWindow(pokemonData.id);
+  } catch (error) {
+      alert(error.message);
+  }
 }
-*/
-//função para paginação de itens da lista
-//função para converter o resultado da promise em html para ser exibido e manipulado
-function loadPokemonItens(offset, limit) {
-  pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
-    const newHtml = pokemons
-    .map(
-      (pokemon) =>
-        `
-      <li class="pokemon ${pokemon.type}">
-    <span class="number">#${pokemon.number}</span>
-    <span class="name">${pokemon.name}</span>
-    
-    <div class="detail">
-        <ol class="types">
-        ${pokemon.types
-          .map((type) => `<li class="type ${type}" >${type}</li>`)
-          .join("")}
-        </ol>
-        <img src="${pokemon.photo}" alt="${pokemon.name}">
+
+------------ JAVASCRIPT CONTENDO HTML DA PAGINAÇÃO DA POKEDEX -------------
+
+
+// Função para carregar os detalhes do Pokémon em uma nova janela
+function loadPokemonDetailsInNewWindow(pokemonId) {
+  const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
+  fetch(url)
+    .then((response) => response.json())
+    .then(convertPokeApiDetailToPokemon)
+    .then((pokemon) => {
+      const detailsPage = `
+
+<div class="container">
+  <div class="pokedex-details">
+    <div class="header-details ${pokemon.type}">
+      <button class="back title" id="backButton">&lArr; PokeDex </button>
+      <img src="${pokemon.photo}" alt="${pokemon.name}">
+      <span class="number"># ${pokemon.number}</span>
     </div>
-</li>
 
-    `
+    <div class="pokemon-info">
+      <h1 class="name-details">${pokemon.name}</h1>
+      <ol class="types-details">
+        ${pokemon.types
+          .map((type) => `<li class="type-details ${type}" >${type}</li>`)
+          .join("")}
+      </ol>
+    </div>
+    <div class="poke-details">
+      <span class="height">Height: ${pokemon.height}</span>
+      <span class="weight">Weight: ${pokemon.weight}</span>
+    </div>
+
+    <div class="poke-details">
+      <p>Base Experience: ${pokemon.base_experience}</p>
+      <h3>Abilities</h3>
+      <ul>
+        ${pokemon.abilities
+          .map(
+            (abilities) => `<li class="type ${abilities}">${abilities}</li>`
+          )
+          .join("")}
+      </ul>
+    </div>
+
+    
+    <div class="baseStatsContainer">
+    <h2>Base Stats</h2>
+
+    <div class="statsNumber">
+    <div class="statsName">
+    ${pokemon.statsName
+      .map(
+        (statsName) => `<div class="type ${statsName}">${statsName}</div>`
       )
-      .join("");
-    pokemonList.innerHTML += newHtml;
-  });
+      .join("")}
+      </div>
+      ${pokemon.statsNumber
+        .map((statsNumber) => {
+          const percentage = (statsNumber / 100) * 100;
+          return `<div class="progress-bar" style="width: ${percentage}%;"><span>${statsNumber}</span></div>`;
+        })
+        .join("")}
+    </div>
+  </div>
+
+`;
+
+      // lnkar o botão de voltar
+      document.body.innerHTML = detailsPage;
+
+      document.getElementById("backButton").addEventListener("click", () => {
+        location.reload();
+      });
+    });
 }
 
-
-/*Botão relacionadio a paginação*/
-loadPokemonItens(offset, limit);
-
-loadMoreButton.addEventListener("click", () => {
-  offset += limit;
-  const qtdRecordWithNextPage = offset + limit
-//se a pagina atingir o numero pre estabelecido retira o botão para continaur carregando
-  if(qtdRecordWithNextPage >= maxRecords) {
-    const newLimit = maxRecords - offset
-    loadPokemonItens(offset, newLimit)
-  
-    loadMoreButton.parentElement.removeChild(loadMoreButton)
-  }else{
-    loadPokemonItens(offset, limit);
+// Adiciona um event listener a cada item da lista de Pokémon
+document.addEventListener("DOMContentLoaded", () => {
+  const pokemonList = document.getElementById("pokemonList");
+  if (pokemonList) {
+    pokemonList.addEventListener("click", (event) => {
+      const pokemonItem = event.target.closest("li.pokemon");
+      if (pokemonItem) {
+        const pokemonId = pokemonItem
+          .querySelector(".number")
+          .textContent.replace("#", "");
+        loadPokemonDetailsInNewWindow(pokemonId);
+      }
+    });
   }
 });
-//modelo base
 
-class Pokemon {
-    number;
-    name;
-    types = [];
-    type;
-    photo;
+--------- ARQUIVO BASE JAVASCRIPT DE COMUNICAÇÃO E UTILIZAÇÃO DE API --------------
+
+const pokeApi = {};
+
+function convertPokeApiDetailToPokemon(pokeDetail) {
+  const pokemon = new Pokemon()
+  pokemon.number = pokeDetail.id
+  pokemon.name = pokeDetail.name
+  pokemon.height = pokeDetail.height
+  pokemon.weight = pokeDetail.weight
+  pokemon.base_experience = pokeDetail.base_experience
+
+  const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name)
+  const [type] = types
+  
+  pokemon.types = types
+  pokemon.type = type
+
+  const abilities = pokeDetail.abilities.map((ability) => ability.ability.name)
+  pokemon.abilities = abilities
+
+  const statsName = pokeDetail.stats.map((stat) => stat.stat.name);
+  pokemon.statsName = statsName
+  
+  const statsNumber = pokeDetail.stats.map((stat) =>stat.base_stat);
+  pokemon.statsNumber = statsNumber
+  
+  pokemon.photo = pokeDetail.sprites.other.showdown.front_default
+  
+  return pokemon
 }
-class PokemonDetailsPage {
-    abilites = [];
-    moves = [];
-    cries = [];
-    height;
-    weight;
-    locationArea;
+
+pokeApi.getPokemonDetail = (pokemon) => {
+  return fetch(pokemon.url)
+  .then((response) => response.json())
+  .then(convertPokeApiDetailToPokemon)
+}
+
+pokeApi.getPokemons = (offset = 0, limit = 5) => {
+  const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
+  return fetch(url)
+    .then((response) => response.json())
+    .then((jsonbody) => jsonbody.results)
+    .then((pokemons) => pokemons.map(pokeApi.getPokemonDetail))
+    .then((detailRequests) => Promise.all(detailRequests))
+    .then((pokemonsDetails) => pokemonsDetails)
+    .catch((error) => console.error(error))
+    
 }

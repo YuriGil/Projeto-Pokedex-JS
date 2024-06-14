@@ -1,9 +1,3 @@
-/*
-const offset = 0;
-const limit = 9;
-const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
-*/
-//pega o elemento do HTML para ser manipulado no JS
 const pokemonList = document.getElementById("pokemonList");
 const loadMoreButton = document.getElementById("loadMoreButton");
 
@@ -11,39 +5,10 @@ const maxRecords = 151;
 const limit = 5;
 let offset = 0;
 
-
-/*
-
------Outros modos de escrever----
-
-//transforma a lista promise em lista HTML
-pokeApi.getPokemons().then((pokemons = []) => {
-  //literalmente mapeia os elementos do array para manipulação
-  const newList = pokemons.map((pokemon) => {
-    return convertPokemonToLi(pokemon);
-  })
-  //join = concatena os itens do array
-  const newHtml = newList.join("")
-  pokemonList.innerHTML += newHtml
-  
-})
-
-
------ outra forma de escrever -----
-
-const listaItems = []
-//percorrendo a lista
-for (let i = 0; i < pokemons.length; i++) {
-  //pega o elemento e converte ele para LI
-  const pokemon = pokemons[i];
-  //concatenando ele na lista
-  listaItems(convertPokemonToLi(pokemon))
-}
-*/
-//função para paginação de itens da lista
-//função para converter o resultado da promise em html para ser exibido e manipulado
 function loadPokemonItens(offset, limit) {
-  pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
+  pokeApi.getPokemons(offset, limit)
+  
+  .then((pokemons = []) => {
     const newHtml = pokemons
     .map(
       (pokemon) =>
@@ -59,7 +24,8 @@ function loadPokemonItens(offset, limit) {
           .join("")}
         </ol>
         <img src="${pokemon.photo}" alt="${pokemon.name}">
-    </div>
+        </div>
+    <img class="background" src="../img/pokeball-gray.svg" alt="">
 </li>
 
     `
@@ -86,3 +52,32 @@ loadMoreButton.addEventListener("click", () => {
     loadPokemonItens(offset, limit);
   }
 });
+
+/**********BUSCA E PAGINÇÃO DA POKEDEX*********/
+async function searchPokemon() {
+  const pokemonName = document.getElementById('pokemon-name').value.toLowerCase();
+  const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+
+  try {
+    const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error('Pokémon não encontrado');
+      }
+      
+      const pokemonData = await response.json();
+      
+      // Chamar a função preexistente para exibir os detalhes do Pokémon
+      loadPokemonDetailsInNewWindow(pokemonData.id);
+  } catch (error) {
+      alert(error.message);
+    }
+  }
+  
+  document.addEventListener("keypress", function(e){
+
+    if (e.key === "Enter"){
+        //console.log("Apertou o enter");
+        const button = document.querySelector("span");
+        button.click();
+    }
+})
