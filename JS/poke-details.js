@@ -9,11 +9,11 @@ function loadPokemonDetailsInNewWindow(pokemonId) {
 
 <div class="poke-container">
 <div class="pokedex-details">
-<img class="poke-background" src="../img/pokeball-gray.svg" alt="">
+<img class="poke-background" src="./img/pokeball-gray.svg" alt="">
     <div class="header-details ${pokemon.type}">
       <button class="back title" id="backButton"><div class="seta"></div>&nbsp; &nbsp;   PokeDex</button>
       <img src="${pokemon.photo}" alt="${pokemon.name}">
-      <img class="background" src="../img/pokeball-gray.svg" alt="">
+      <img class="background" src="./img/pokeball-gray.svg" alt="">
       <span class="poke-number"># ${pokemon.number}</span>
     </div>
 

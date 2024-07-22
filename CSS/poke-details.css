@@ -9,7 +9,6 @@
 }
 
 .pokedex-details {
-  width: 50vw;
   z-index: 1;
   overflow: hidden;
   position: relative;

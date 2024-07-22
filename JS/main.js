@@ -25,7 +25,7 @@ function loadPokemonItens(offset, limit) {
         </ol>
         <img src="${pokemon.photo}" alt="${pokemon.name}">
         </div>
-    <img class="background" src="../img/pokeball-gray.svg" alt="">
+    <img class="background" src="./img/pokeball-gray.svg" alt="">
 </li>
 
     `
