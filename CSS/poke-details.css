@@ -2,7 +2,7 @@
   z-index: -1;
   display: flex;
   justify-content: center;
-  background-image: url(img/favicon.png);
+  background-image: url(/img/favicon.png);
   background-position: 50%;
   background-attachment: fixed;
   border-radius: 10px;
